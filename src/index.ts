@@ -20,8 +20,6 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 
-console.log({jwtKeyId: process.env.JWT_KEY_ID, jwtSecret: process.env.JWT_SECRET})
-
 const generateJwtToken = (userData: TelegramUser) => {
   const payload = {
     telegram_id: userData.id,
@@ -56,7 +54,6 @@ app.get("/callback", async (req, res) => {
     const user = await validator.validate(data);
     const JWTtoken = generateJwtToken(user);
 
-   console.log({user, JWTtoken})
    res.redirect('https://www.google.com')
   } catch (error) {
     console.error("Error validating Telegram data:", error);
