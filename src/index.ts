@@ -54,7 +54,7 @@ app.get("/callback", async (req, res) => {
     const user = await validator.validate(data);
     const JWTtoken = generateJwtToken(user);
 
-   res.redirect('https://www.google.com')
+    const redirectUrl = `${process.env.FRONTEND_URL}?token=${JWTtoken}`;
   } catch (error) {
     console.error("Error validating Telegram data:", error);
     res.status(400).send("Invalid Telegram data");
